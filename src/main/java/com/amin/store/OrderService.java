@@ -12,7 +12,7 @@ public class OrderService {
 
     private final PaymentService paymentService;
 
-    @Autowired
+    //@Autowired
     public OrderService(PaymentService paymentService) {
         this.paymentService = paymentService;
     }
