@@ -1,6 +1,7 @@
 package com.amin.store;
 
 import com.amin.store.entities.Address;
+import com.amin.store.entities.Profile;
 import com.amin.store.entities.Tag;
 import com.amin.store.entities.User;
 import org.springframework.boot.SpringApplication;
@@ -18,8 +19,20 @@ public class StoreApplication {
                 .email("admin@google.com")
                 .password("admin").build();
 
-        user.addTag("Tag1");
+
+        var profile = Profile.builder().bio("bio").build();
+        user.setProfile(profile);
+        profile.setUser(user);
+
+        System.out.println("--- User Object ---");
         System.out.println(user);
+
+        System.out.println("\n--- Profile Object (toString() output) ---");
+        System.out.println(profile);
+
+        System.out.println("\n--- Verifying the link from Profile back to User ---");
+        // This proves the connection exists, even if toString() hides it
+        System.out.println("Username from profile object: " + profile.getUser().getName());
     }
 
 }

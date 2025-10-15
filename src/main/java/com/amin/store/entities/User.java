@@ -52,6 +52,11 @@ public class User {
         tag.getUsers().add(this);
     }
 
+    public void addProfile(Profile _profile) {
+        this.setProfile(_profile);
+        _profile.setUser(this);
+    }
+
     @ManyToMany
     @JoinTable(
             name = "user_tags",
@@ -60,4 +65,7 @@ public class User {
     )
     @Builder.Default
     private Set<Tag> tags = new HashSet<>();
+
+    @OneToOne(mappedBy = "user")
+    private Profile profile;
 }
