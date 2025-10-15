@@ -1,6 +1,7 @@
 package com.amin.store;
 
 import com.amin.store.entities.Address;
+import com.amin.store.entities.Tag;
 import com.amin.store.entities.User;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,15 +18,7 @@ public class StoreApplication {
                 .email("admin@google.com")
                 .password("admin").build();
 
-        var address = Address.builder()
-                .id(1L)
-                .zip("1361973711")
-                .city("Tehran")
-                .street("Abedi")
-                .state("Tehran").build();
-
-        user.addAddress(address);
-
+        user.addTag("Tag1");
         System.out.println(user);
     }
 
