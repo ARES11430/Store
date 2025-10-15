@@ -35,6 +35,26 @@ public class User {
     @Builder.Default
     private List<Address> addresses = new ArrayList<>();
 
+    @ManyToMany
+    @JoinTable(
+            name = "user_tags",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id")
+    )
+    @Builder.Default
+    private Set<Tag> tags = new HashSet<>();
+
+    @OneToOne(mappedBy = "user")
+    private Profile profile;
+
+    @ManyToMany
+    @JoinTable(
+            name = "wishlist",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    private Set<Product> wishlist = new HashSet<>();
+
     public void addAddress(Address address) {
         addresses.add(address);
         address.setUser(this);
@@ -56,16 +76,4 @@ public class User {
         this.setProfile(_profile);
         _profile.setUser(this);
     }
-
-    @ManyToMany
-    @JoinTable(
-            name = "user_tags",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "tag_id")
-    )
-    @Builder.Default
-    private Set<Tag> tags = new HashSet<>();
-
-    @OneToOne(mappedBy = "user")
-    private Profile profile;
 }
