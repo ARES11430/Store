@@ -1,17 +1,13 @@
 package com.amin.store.services;
 
-import com.amin.store.entities.*;
+import com.amin.store.entities.User;
 import com.amin.store.repositories.AddressRepository;
 import com.amin.store.repositories.ProfileRepository;
 import com.amin.store.repositories.UserRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.*;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-
-import java.math.BigDecimal;
 
 @AllArgsConstructor
 @Service
@@ -19,6 +15,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final ProfileRepository profileRepository;
     private final EntityManager entityManager;
+    private final AddressRepository addressRepository;
 
     @Transactional
     public void showEntityStates() {
@@ -47,5 +44,9 @@ public class UserService {
     public void showRelatedEntities() {
         var profile = profileRepository.findById(1L).orElseThrow();
         System.out.println(profile.getUser().getEmail());
+    }
+
+    public void fetchAddress() {
+        addressRepository.findById(1L).orElseThrow();
     }
 }
