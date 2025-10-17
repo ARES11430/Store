@@ -7,3 +7,5 @@ spring:
     password: 7bWLKa8Hl0VlvSqe5nUx
   flyway:
     baseline-on-migrate: true
+  jpa:
+    show-sql: true
