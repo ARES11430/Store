@@ -2,7 +2,6 @@ package com.amin.store.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.action.internal.OrphanRemovalAction;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -76,5 +75,9 @@ public class User {
     public void addProfile(Profile _profile) {
         this.setProfile(_profile);
         _profile.setUser(this);
+    }
+
+    public void addWishlist(Product product) {
+        wishlist.add(product);
     }
 }

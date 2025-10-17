@@ -3,11 +3,13 @@ package com.amin.store.services;
 import com.amin.store.entities.Address;
 import com.amin.store.entities.User;
 import com.amin.store.repositories.AddressRepository;
+import com.amin.store.repositories.ProductRepository;
 import com.amin.store.repositories.ProfileRepository;
 import com.amin.store.repositories.UserRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Service;
 
 @AllArgsConstructor
@@ -17,6 +19,7 @@ public class UserService {
     private final ProfileRepository profileRepository;
     private final EntityManager entityManager;
     private final AddressRepository addressRepository;
+    private ProductRepository productRepository;
 
     @Transactional
     public void showEntityStates() {
@@ -76,5 +79,10 @@ public class UserService {
         var address = user.getAddresses().getFirst();
         user.removeAddress(address);
         userRepository.save(user);
+    }
+
+    @Transactional
+    public void manageProducts() {
+        productRepository.deleteById(4L);
     }
 }
