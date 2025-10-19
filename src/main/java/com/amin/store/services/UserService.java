@@ -2,6 +2,7 @@ package com.amin.store.services;
 
 import com.amin.store.entities.Address;
 import com.amin.store.entities.Category;
+import com.amin.store.entities.Product;
 import com.amin.store.entities.User;
 import com.amin.store.repositories.AddressRepository;
 import com.amin.store.repositories.ProductRepository;
@@ -10,6 +11,8 @@ import com.amin.store.repositories.UserRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Service;
 
@@ -95,8 +98,18 @@ public class UserService {
     }
 
     @Transactional
-    public void fetchProducts(){
-        var products = productRepository.findProducts(BigDecimal.valueOf(1), BigDecimal.valueOf(15));
+    public void fetchProducts() {
+        var product = new Product();
+        product.setName("product");
+
+        var matcher = ExampleMatcher.matching()
+                .withIncludeNullValues()
+                .withIgnorePaths("id", "description")
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+
+        var example = Example.of(product, matcher);
+
+        var products = productRepository.findAll(example);
         products.forEach(System.out::println);
     }
 
