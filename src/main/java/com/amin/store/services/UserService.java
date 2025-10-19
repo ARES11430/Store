@@ -1,6 +1,7 @@
 package com.amin.store.services;
 
 import com.amin.store.entities.Address;
+import com.amin.store.entities.Category;
 import com.amin.store.entities.User;
 import com.amin.store.repositories.AddressRepository;
 import com.amin.store.repositories.ProductRepository;
@@ -91,5 +92,10 @@ public class UserService {
     @Transactional
     public void updateProductPrices() {
         productRepository.updatePriceByCategory(BigDecimal.valueOf(10), (byte)1);
+    }
+
+    public void fetchProducts(){
+        var products = productRepository.findByCategory(new Category((byte) 1));
+        products.forEach(System.out::println);
     }
 }
