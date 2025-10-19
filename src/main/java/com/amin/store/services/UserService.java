@@ -12,6 +12,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 @AllArgsConstructor
 @Service
 public class UserService {
@@ -84,5 +86,10 @@ public class UserService {
     @Transactional
     public void manageProducts() {
         productRepository.deleteById(4L);
+    }
+
+    @Transactional
+    public void updateProductPrices() {
+        productRepository.updatePriceByCategory(BigDecimal.valueOf(10), (byte)1);
     }
 }
