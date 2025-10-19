@@ -13,6 +13,6 @@ public class StoreApplication {
         var context = SpringApplication.run(StoreApplication.class, args);
         var userService = context.getBean(UserService.class);
 
-        userService.fetchProducts();
+        userService.fetchProductsByCriteria();
     }
 }
